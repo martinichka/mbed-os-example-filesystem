@@ -69,46 +69,22 @@ void erase() {
     }
 }
 
-bool writeData(const char *data, uint16_t len)
+void writeData(const char *data, uint16_t len)
 {
-    bool res = false;
-    static int currWritePos = 0;
     FILE *f = fopen("/fs/somefile.txt", "a");
     tr_info("%s\n", (!f ? "Fail :(" : "OK"));
     if (!f) {
         tr_error("error while reading file, does it exist?: %s (%d)\n", strerror(errno), -errno);
-        return false;
     }
 
     tr_info("Writing data to flash");
-    const char MAGIC[3] = {'T', 'X', 'T'};
-    fwrite(MAGIC, 3, 1, f);
-    uint8_t len_byte = len;
-    fwrite(&len_byte, 1, 1, f);
     fwrite((const char*)data, len, 1, f);
-
-
-    // FIXME: fwrite still returns 1 when it failed due to "lfs warn:314: No more free space 32", workaround by checking write position
-    int eofPos = ftell(f);
-    tr_info("Pos was: %d, added: %d. EOF at: %d", currWritePos, len + 4, eofPos);
-    currWritePos += len + 4;
-    if (currWritePos == eofPos)
-    {
-        res = true;
-    }
-    else
-    {
-        tr_error("Writing data failed");
-    }
 
     int err = fclose(f);
     tr_info("%s\n", (err < 0 ? "Fail :(" : "OK"));
     if (err < 0) {
         tr_error("error: %s (%d)\n", strerror(errno), -errno);
     }
-
-
-    return res;
 }
 
 // Entry point for the example
