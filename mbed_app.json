@@ -2,6 +2,8 @@
     "target_overrides": {
         "*": {
             "platform.stdio-convert-newlines": true,
+	    "mbed-trace.enable": 1,
+	    "platform.stdio-baud-rate": 115200,
 	    "target.features_add": ["STORAGE"],
             "target.components_add": ["SPIF"],
             "target.stdio_uart_tx":"PD_8",
