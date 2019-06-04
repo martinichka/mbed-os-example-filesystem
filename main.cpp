@@ -115,8 +115,9 @@ int main() {
         }
     }
 
-    const char data[] = "some data, could be binary, bla bla, ..........................................asdf asdf adsf asdf adsf jadfk kdkfadskf even more.....";
-    for (int i = 0; i < 100; i++)
+    //const char data[] = "some data, could be binary, bla bla, ..........................................asdf asdf adsf asdf adsf jadfk kdkfadskf even more.....";
+    const char data[] = "some data";
+    for (int i = 0; i < 1000; i++)
     {
 	    writeData(data, sizeof(data));
     }
