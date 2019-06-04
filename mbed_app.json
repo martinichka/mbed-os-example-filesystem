@@ -1,7 +1,15 @@
 {
     "target_overrides": {
         "*": {
-            "platform.stdio-convert-newlines": true
+            "platform.stdio-convert-newlines": true,
+	    "target.features_add": ["STORAGE"],
+            "target.components_add": ["SPIF"],
+            "target.stdio_uart_tx":"PD_8",
+	    "target.stdio_uart_rx":"PD_9",
+	    "spif-driver.SPI_MISO":"PC_11",
+	    "spif-driver.SPI_MOSI":"PB_5_ALT0",
+	    "spif-driver.SPI_CS":"PA_15_ALT0",
+	    "spif-driver.SPI_CLK":"PC_10"
         }
     }
 }
